@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="615.0" style="-fx-background-color: #F0F8FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.ny.client.controller.MainController">
+   <children>
+      <AnchorPane prefHeight="130.0" prefWidth="615.0" style="-fx-background-color: #5F9EA0;">
+         <children>
+            <Label layoutX="72.0" layoutY="8.0" prefHeight="114.0" prefWidth="510.0" text="Приложение для прогнозирования&#10; платежеспособности &#10;предприятия на основе модели Фулмера" textAlignment="CENTER" textFill="#bbf9ff">
+               <font>
+                  <Font name="System Italic" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <TextField fx:id="loginField" layoutX="196.0" layoutY="158.0" prefHeight="42.0" prefWidth="222.0" promptText="Логин" style="-fx-border-color: #5F9EA0; -fx-background-color: #F0FFFF; -fx-border-radius: 10;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <Button fx:id="signInButton" layoutX="196.0" layoutY="290.0" mnemonicParsing="false" onAction="#authorization" prefHeight="42.0" prefWidth="222.0" style="-fx-background-radius: 10; -fx-background-color: #48D1CC;" text="Войти" textFill="#404444">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Button>
+      <Button fx:id="signUpButton" layoutX="196.0" layoutY="349.0" mnemonicParsing="false" onAction="#registration" prefHeight="42.0" prefWidth="222.0" style="-fx-background-radius: 10; -fx-background-color: #AFEEEE;" text="Зарегистрироваться" textAlignment="CENTER" textFill="#404444">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Button>
+      <PasswordField fx:id="passwordFiled" layoutX="196.0" layoutY="220.0" prefHeight="42.0" prefWidth="222.0" promptText="Пароль" style="-fx-border-color: #5F9EA0; -fx-background-color: #F0FFFF; -fx-border-radius: 10;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </PasswordField>
+   </children>
+</AnchorPane>
