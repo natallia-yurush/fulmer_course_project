@@ -10,11 +10,11 @@ public class Report implements Serializable {
     private int id;
     private double x1, x2, x3, x4, x5, x6, x7, x8, x9;
     private double result;
-    private int idUSD;
-    private int idCompany;
+    private DollarRate dollarRate;
+    private Company company;
 
-    public Report(Date date, int id, double x1, double x2, double x3, double x4, double x5, double x6, double x7,
-                  double x8, double x9, double result, int idUSD, int idCompany) {
+    public Report(Date date, int id, double x1, double x2, double x3, double x4, double x5, double x6,
+                  double x7, double x8, double x9, double result, DollarRate dollarRate, Company company) {
         this.date = date;
         this.id = id;
         this.x1 = x1;
@@ -27,8 +27,8 @@ public class Report implements Serializable {
         this.x8 = x8;
         this.x9 = x9;
         this.result = result;
-        this.idUSD = idUSD;
-        this.idCompany = idCompany;
+        this.dollarRate = dollarRate;
+        this.company = company;
     }
 
     public Date getDate() {
@@ -127,19 +127,19 @@ public class Report implements Serializable {
         this.result = result;
     }
 
-    public int getIdUSD() {
-        return idUSD;
+    public DollarRate getDollarRate() {
+        return dollarRate;
     }
 
-    public void setIdUSD(int idUSD) {
-        this.idUSD = idUSD;
+    public void setDollarRate(DollarRate dollarRate) {
+        this.dollarRate = dollarRate;
     }
 
-    public int getIdCompany() {
-        return idCompany;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setIdCompany(int idCompany) {
-        this.idCompany = idCompany;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

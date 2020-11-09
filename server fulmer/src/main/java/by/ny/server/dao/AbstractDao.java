@@ -9,7 +9,7 @@ public class AbstractDao {
     public AbstractDao() {
         try {
             this.connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/fulmer","root","кщще");
+                    "jdbc:mysql://localhost:3306/fulmer","root","root");
         } catch (Exception e) {
             e.printStackTrace();
         }

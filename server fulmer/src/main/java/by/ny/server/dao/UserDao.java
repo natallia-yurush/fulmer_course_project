@@ -63,7 +63,7 @@ public class UserDao extends AbstractDao {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT id, surname, name, login, password, phone_number, role, email FROM user");
+                    "SELECT id, surname, name, login, password, phone_number, role, email FROM user WHERE role = \'CLIENT\'");
             while (resultSet.next()) {
                 result.add(new User(resultSet.getInt(1), resultSet.getString(2),
                         resultSet.getString(3), resultSet.getString(4), resultSet.getString(5),
@@ -76,7 +76,7 @@ public class UserDao extends AbstractDao {
         return result;
     }
 
-    public User getUserById(Integer id) {
+    public User findUserById(Integer id) {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("SELECT id, surname, name, login, password, phone_number, role, email " +

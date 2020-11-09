@@ -17,7 +17,7 @@ public class UserService {
     }
 
     public User getUserById(Integer id) {
-        return userDao.getUserById(id);
+        return userDao.findUserById(id);
     }
 
     public boolean deleteUser(Integer id) {

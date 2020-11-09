@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="615.0" style="-fx-background-color: #F0F8FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.ny.client.controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="615.0" style="-fx-background-color: #F0F8FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.ny.client.controller.AuthorizationController">
    <children>
       <AnchorPane prefHeight="130.0" prefWidth="615.0" style="-fx-background-color: #5F9EA0;">
          <children>
@@ -33,7 +33,7 @@
             <Font name="System Bold" size="19.0" />
          </font>
       </Button>
-      <PasswordField fx:id="passwordFiled" layoutX="196.0" layoutY="220.0" prefHeight="42.0" prefWidth="222.0" promptText="Пароль" style="-fx-border-color: #5F9EA0; -fx-background-color: #F0FFFF; -fx-border-radius: 10;">
+      <PasswordField fx:id="passwordField" layoutX="196.0" layoutY="221.0" prefHeight="42.0" prefWidth="222.0" promptText="Пароль" style="-fx-border-color: #5F9EA0; -fx-background-color: #F0FFFF; -fx-border-radius: 10;">
          <font>
             <Font size="15.0" />
          </font>

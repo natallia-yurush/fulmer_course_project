@@ -2,7 +2,7 @@ package by.ny.client.controller;
 
 import by.ny.client.ConnectionUtil;
 import by.ny.client.CurrentUserUtil;
-import by.ny.client.util.Message;
+import by.ny.client.util.InformationDialog;
 import by.ny.server.controller.command.user.RegistrationCommand;
 import by.ny.server.controller.result.user.RegistrationResult;
 import by.ny.server.entity.RegistrationStatus;
@@ -49,21 +49,21 @@ public class RegistrationController {
                 loginField.getText().trim().isEmpty() ||
                 passwordField.getText().trim().isEmpty() ||
                 emailField.getText().trim().isEmpty() || phoneNumberField.getText().trim().isEmpty()) {
-            Message.viewMessage("Заполните, пожалуйста, все поля!");
+            InformationDialog.viewMessage("Заполните, пожалуйста, все поля!");
             return;
         }
         if (!Validator.isCorrectEmail(emailField.getText())) {
-            Message.viewMessage("Некорректно введен email.");
+            InformationDialog.viewMessage("Некорректно введен email.");
             return;
         } else if (!Validator.isCorrectLogin(loginField.getText())) {
-            Message.viewMessage("Логин слишком длинный! Придумайте новый.");
+            InformationDialog.viewMessage("Логин слишком длинный! Придумайте новый.");
             return;
         } else if (!Validator.isCorrectPassword(passwordField.getText())) {
-            Message.viewMessage("Неправильный тип пароля! Должно быть не менее 8 символов, " +
+            InformationDialog.viewMessage("Неправильный тип пароля! Должно быть не менее 8 символов, " +
                     "не менее 1 заглавной буквы, 1 строчной буквы и 1 цифры");
             return;
         } else if (!Validator.isCorrectPhoneNumber(phoneNumberField.getText())) {
-            Message.viewMessage("Некорректно введен номер.");
+            InformationDialog.viewMessage("Некорректно введен номер.");
             return;
         }
 
@@ -80,18 +80,18 @@ public class RegistrationController {
             RegistrationResult result = (RegistrationResult) inputStream.readObject();
 
             if (result.getRegistrationStatus() == RegistrationStatus.EXISTING_EMAIL) {
-                Message.viewMessage("Пользователь с данной почтой уже существует!");
+                InformationDialog.viewMessage("Пользователь с данной почтой уже существует!");
             } else if (result.getRegistrationStatus() == RegistrationStatus.EXISTING_LOGIN) {
-                Message.viewMessage("Пользователь с данным логином уже существует!");
+                InformationDialog.viewMessage("Пользователь с данным логином уже существует!");
             } else if (result.getRegistrationStatus() == RegistrationStatus.REGISTERED) {
                 CurrentUserUtil.setCurrentUser(result.getUser());
-                Message.viewMessage("Пользователь успешно зарегистрирован!");
+                InformationDialog.viewMessage("Пользователь успешно зарегистрирован!");
 
                 ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
             }
 
         } catch (Exception e) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(AuthorizationController.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }

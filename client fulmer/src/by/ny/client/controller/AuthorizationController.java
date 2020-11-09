@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 import by.ny.client.ConnectionUtil;
 import by.ny.client.CurrentUserUtil;
-import by.ny.client.util.Message;
+import by.ny.client.util.InformationDialog;
 import by.ny.server.controller.command.user.AuthorizationCommand;
 import by.ny.server.controller.result.user.AuthorizationResult;
 import by.ny.server.entity.UserRole;
@@ -24,7 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class MainController {
+public class AuthorizationController {
 
     @FXML
     private ResourceBundle resources;
@@ -46,10 +46,10 @@ public class MainController {
 
     @FXML
     void initialize() {
-        /*assert loginField != null : "fx:id=\"loginField\" was not injected: check your FXML file 'Main.fxml'.";
-        assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'Main.fxml'.";
-        assert signInButton != null : "fx:id=\"signInButton\" was not injected: check your FXML file 'Main.fxml'.";
-        assert signUpButton != null : "fx:id=\"signUpButton\" was not injected: check your FXML file 'Main.fxml'.";*/
+        /*assert loginField != null : "fx:id=\"loginField\" was not injected: check your FXML file 'AuthorizationWindow.fxml'.";
+        assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'AuthorizationWindow.fxml'.";
+        assert signInButton != null : "fx:id=\"signInButton\" was not injected: check your FXML file 'AuthorizationWindow.fxml'.";
+        assert signUpButton != null : "fx:id=\"signUpButton\" was not injected: check your FXML file 'AuthorizationWindow.fxml'.";*/
 
     }
 
@@ -57,15 +57,11 @@ public class MainController {
     public void registration(ActionEvent actionEvent) {
         try {
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/by/ny/client/view/Registration.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/by/ny/client/view/RegistrationWindow.fxml"));
             stage.setTitle("Регистрация");
             stage.setResizable(false);
             stage.setScene(new Scene(root));
             stage.show();
-            //stage.initModality(Modality.WINDOW_MODAL);
-            //stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
-            //client.Client.getInstance().send("registration");
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -85,17 +81,21 @@ public class MainController {
             if (result.isAuthorized()) {
                 CurrentUserUtil.setCurrentUser(result.getUser());
                 if (result.getUser().getRole() == UserRole.ADMIN) {
-                    //TODO
-                    //new AdministratorWindow().setVisible(true);
+                    Stage stage = new Stage();
+                    Parent root = FXMLLoader.load(getClass().getResource("/by/ny/client/view/AdminWindow.fxml"));//TODO AdminWindow
+                    stage.setTitle("Меню администратора");
+                    stage.setResizable(false);
+                    stage.setScene(new Scene(root));
+                    stage.show();
                 } else if (result.getUser().getRole() == UserRole.CLIENT) {
                     //TODO
                     //new ClientWindow().setVisible(true);
                 }
             } else {
-                Message.viewMessage("Авторизация не выполнена!");
+                InformationDialog.viewMessage("Авторизация не выполнена!");
             }
         } catch (Exception ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AuthorizationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -2,7 +2,7 @@ package by.ny.client.util;
 
 import javafx.scene.control.Alert;
 
-public class Message {
+public class InformationDialog {
 
     public static void viewMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

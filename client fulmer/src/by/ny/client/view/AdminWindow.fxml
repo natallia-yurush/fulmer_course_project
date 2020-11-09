@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="698.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+  <tabs>
+    <Tab fx:id="usersTab" text="Пользователи">
+        <fx:include source="UsersTab.fxml"></fx:include>
+<!--      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <StackPane prefHeight="448.0" prefWidth="696.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane fx:id="usersTab" prefHeight="478.0" prefWidth="696.0" style="-fx-background-color: #F0F8FF;">
+                           <children>
+                              <TableView fx:id="usersTable" layoutX="13.0" layoutY="14.0" prefHeight="216.0" prefWidth="671.0" style="-fx-border-color: #5F9EA0;">
+                                <columns>
+                                  <TableColumn fx:id="userIdColumn" prefWidth="63.2000150680542" text="ID" />
+                                  <TableColumn fx:id="userSurnameColumn" prefWidth="112.79998779296875" text="Фамилия" />
+                                    <TableColumn fx:id="userNameColumn" prefWidth="124.79997253417969" text="Имя" />
+                                    <TableColumn fx:id="userPhoneNumberColumn" prefWidth="198.4000244140625" text="Номер телефона" />
+                                    <TableColumn fx:id="userEmailColumn" minWidth="0.0" prefWidth="175.199951171875" text="Email" />
+                                </columns>
+                              </TableView>
+                              <TableView fx:id="companyTable" layoutX="16.0" layoutY="310.0" prefHeight="142.0" prefWidth="665.0" style="-fx-border-color: #5F9EA0;">
+                                <columns>
+                                  <TableColumn fx:id="companyIdColumn" prefWidth="75.0" text="ID" />
+                                  <TableColumn fx:id="companyNameColumn" prefWidth="126.39996337890625" text="Название" />
+                                    <TableColumn fx:id="companyAddressColumn" prefWidth="190.3999481201172" text="Адрес" />
+                                    <TableColumn fx:id="companyPhoneNumberColumn" prefWidth="128.0" text="Номер телефона" />
+                                    <TableColumn fx:id="companyEmailColumn" prefWidth="149.5999755859375" text="Email" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="deleteButton" layoutX="612.0" layoutY="238.0" mnemonicParsing="false" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Удалить">
+                                 <font>
+                                    <Font name="System Italic" size="13.0" />
+                                 </font>
+                              </Button>
+                              <Label layoutX="197.0" layoutY="268.0" text="Компании выбранного пользователя" textFill="#03275f">
+                                 <font>
+                                    <Font name="System Bold Italic" size="17.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
+               </children></AnchorPane>
+      </content>-->
+    </Tab>
+    <Tab fx:id="dollarRateTab" text="Курс доллара">
+        <fx:include source="DollarRateTab.fxml"></fx:include>
+      <!--<content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <StackPane prefHeight="448.0" prefWidth="696.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="696.0" style="-fx-background-color: #F0F8FF;">
+                           <children>
+                              <Label layoutX="153.0" layoutY="38.0" text="Добавить текущий курс доллара США" textFill="#23345c">
+                                 <font>
+                                    <Font name="System Bold Italic" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="169.0" layoutY="98.0" text="к EUR:" textFill="#0c1464">
+                                 <font>
+                                    <Font name="System Italic" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="r" layoutX="168.0" layoutY="159.0" text="к BYN:" textFill="#0c1464">
+                                 <font>
+                                    <Font name="System Italic" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="eurField" layoutX="245.0" layoutY="93.0" style="-fx-border-radius: 5;">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="bynField" layoutX="245.0" layoutY="154.0" style="-fx-border-radius: 5;">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="190.0" layoutY="239.0" text="История изменения курса доллара" textFill="#23345c">
+                                 <font>
+                                    <Font name="System Bold Italic" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="historyTable" layoutX="38.0" layoutY="285.0" prefHeight="167.0" prefWidth="618.0">
+                                <columns>
+                                  <TableColumn fx:id="dateColumn" prefWidth="214.39996337890625" text="Дата" />
+                                  <TableColumn fx:id="eurColumn" prefWidth="198.4000244140625" text="EUR" />
+                                    <TableColumn fx:id="bynColumn" prefWidth="204.800048828125" text="BYN" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="addButton" layoutX="460.0" layoutY="120.0" mnemonicParsing="false" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Добавить">
+                                 <font>
+                                    <Font name="System Italic" size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
+               </children></AnchorPane>
+      </content>-->
+    </Tab>
+  </tabs>
+</TabPane>
