@@ -82,14 +82,18 @@ public class AuthorizationController {
                 CurrentUserUtil.setCurrentUser(result.getUser());
                 if (result.getUser().getRole() == UserRole.ADMIN) {
                     Stage stage = new Stage();
-                    Parent root = FXMLLoader.load(getClass().getResource("/by/ny/client/view/AdminWindow.fxml"));//TODO AdminWindow
+                    Parent root = FXMLLoader.load(getClass().getResource("/by/ny/client/view/AdminWindow.fxml"));
                     stage.setTitle("Меню администратора");
                     stage.setResizable(false);
                     stage.setScene(new Scene(root));
                     stage.show();
                 } else if (result.getUser().getRole() == UserRole.CLIENT) {
-                    //TODO
-                    //new ClientWindow().setVisible(true);
+                    Stage stage = new Stage();
+                    Parent root = FXMLLoader.load(getClass().getResource("/by/ny/client/view/UserWindow.fxml"));
+                    stage.setTitle("Меню пользователя");
+                    stage.setResizable(false);
+                    stage.setScene(new Scene(root));
+                    stage.show();
                 }
             } else {
                 InformationDialog.viewMessage("Авторизация не выполнена!");

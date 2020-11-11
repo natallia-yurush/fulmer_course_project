@@ -3,13 +3,17 @@ package by.ny.client.controller;
 import by.ny.client.ConnectionUtil;
 import by.ny.client.util.ConfirmationDialog;
 import by.ny.client.util.InformationDialog;
+import by.ny.server.controller.command.company.ListCompaniesCommand;
 import by.ny.server.controller.command.user.DeleteUserCommand;
 import by.ny.server.controller.command.user.ListUsersCommand;
+import by.ny.server.controller.result.company.ListCompaniesResult;
 import by.ny.server.controller.result.user.ListUsersResult;
 import by.ny.server.controller.result.user.UpdateUserStatusResult;
 import by.ny.server.entity.Company;
 import by.ny.server.entity.User;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +22,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.skin.VirtualFlow;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -64,7 +69,10 @@ public class UsersTabController {
     @FXML
     private Button deleteButton;
 
-    //deleteButton.disableProperty().bind(Bindings.isEmpty(tableView.getSelectionModel().getSelectedItems()));
+    private VirtualFlow flow;
+
+    private ObservableList<User> users =
+            FXCollections.observableArrayList();
 
     @FXML
     void initialize() {
@@ -73,23 +81,16 @@ public class UsersTabController {
 
 
         //TODO когда выбирается строка из таблицы -> выводится новая таблица компаний
-/*
 
-        tableView.skinProperty().addListener(new ChangeListener<Skin>()
-        {
+        usersTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
+
             @Override
-            public void changed(ObservableValue<? extends Skin> ov, Skin t, Skin t1)
-            {
-                if (t1 == null) { return; }
-
-                TableViewSkin tvs = (TableViewSkin)t1;
-                ObservableList<Node> kids = tvs.getChildrenUnmodifiable();
-
-                if (kids == null || kids.isEmpty()) { return; }
-                flow = (VirtualFlow)kids.get(1);
+            public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
+                User user = usersTable.getSelectionModel().getSelectedItem();
+                reloadCompanyTableData(user);
             }
         });
-*/
+
 
     }
 
@@ -104,7 +105,7 @@ public class UsersTabController {
             ListUsersResult result = (ListUsersResult) inputStream.readObject();
 
 
-            ObservableList<User> users = FXCollections.observableArrayList();
+            //ObservableList<User>
             users.addAll(result.getUsers());
 
             userIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -115,6 +116,7 @@ public class UsersTabController {
 
             usersTable.setItems(users);
 
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -123,7 +125,7 @@ public class UsersTabController {
     public void deleteUser() {
         User user = usersTable.getSelectionModel().getSelectedItem();
 
-        if(ConfirmationDialog.viewMessage("Вы уверены, что хотите удалить пользователя " +
+        if (ConfirmationDialog.viewMessage("Вы уверены, что хотите удалить пользователя " +
                 user.getSurname() + " " + user.getName() + "?").get() != ButtonType.OK) {
             return;
         }
@@ -139,41 +141,50 @@ public class UsersTabController {
 
             if (result.isSuccess()) {
                 reloadUsersTableData();
-                //TODO reloadCompanyTableData(null);
+                reloadCompanyTableData(null);
                 InformationDialog.viewMessage("Пользователь успешно удален.");
             } else {
                 InformationDialog.viewMessage("Не удалось удалить пользователя.");
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void reloadCompanyTableData(User user) {
+        if (user == null) {
+            clearCompanyTable();
+            return;
+        }
         try {
             Socket socket = ConnectionUtil.getSocket();
 
             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-            outputStream.writeObject(new ListUsersCommand());
+            outputStream.writeObject(new ListCompaniesCommand(user.getId()));
 
             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
-            ListUsersResult result = (ListUsersResult) inputStream.readObject();
+            ListCompaniesResult result = (ListCompaniesResult) inputStream.readObject();
 
 
-            ObservableList<User> users = FXCollections.observableArrayList();
-            users.addAll(result.getUsers());
+            ObservableList<Company> companies = FXCollections.observableArrayList();
+            companies.addAll(result.getCompanies());
 
-            userIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-            userSurnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
-            userNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            userPhoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-            userEmailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+            companyIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+            companyNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            companyAddressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+            companyPhoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+            companyEmailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-            usersTable.setItems(users);
+            companyTable.setItems(companies);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    private void clearCompanyTable() {
+        companyTable.getItems().clear();
+    }
+
 }
 

@@ -6,11 +6,7 @@ import by.ny.server.entity.Company;
 import java.util.List;
 
 public class CompanyService {
-    private CompanyDao companyDao;
-
-    public CompanyService(CompanyDao companyDao) {
-        this.companyDao = companyDao;
-    }
+    private CompanyDao companyDao = CompanyDao.getInstance();
 
     public List<Company> listUsersCompanies(Integer userId) {
         return companyDao.listUsersCompanies(userId);
@@ -24,8 +20,8 @@ public class CompanyService {
         return companyDao.deleteCompany(id);
     }
 
-    public boolean saveCompany(Company company, Integer userId) {
-        return companyDao.saveCompany(company, userId);
+    public boolean saveCompany(Company company) {
+        return companyDao.saveCompany(company);
     }
 
 }

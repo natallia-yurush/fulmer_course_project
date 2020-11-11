@@ -1,23 +1,32 @@
 package by.ny.server.dao;
 
 import by.ny.server.entity.Company;
-import by.ny.server.entity.User;
-import by.ny.server.entity.UserRole;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CompanyDao extends AbstractDao {
+    private CompanyDao() {
+    }
+
+    private static class Holder {
+        public static CompanyDao instance = new CompanyDao();
+    }
+
+    public static CompanyDao getInstance() {
+        return CompanyDao.Holder.instance;
+    }
+
+    UserDao userDao = UserDao.getInstance();
 
     public Company findCompanyById(Integer id) {
         try {
             ResultSet resultSet;
             try (PreparedStatement preparedStatement = connection
-                    .prepareStatement("SELECT id, name, address, email, phone_number " +
+                    .prepareStatement("SELECT id, name, address, email, phone_number, id_user " +
                             "FROM company WHERE id=?")) {
                 preparedStatement.setInt(1, id);
 
@@ -26,7 +35,7 @@ public class CompanyDao extends AbstractDao {
 
             if (resultSet.next()) {
                 return new Company(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
-                        resultSet.getString(4), resultSet.getString(5));
+                        resultSet.getString(4), resultSet.getString(5), userDao.findUserById(resultSet.getInt(6)));
             } else {
                 return null;
             }
@@ -41,13 +50,14 @@ public class CompanyDao extends AbstractDao {
         try {
             ResultSet resultSet;
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("SELECT id_company FROM user_company WHERE id_company = ?");
+                    .prepareStatement("SELECT id, name, address, email, phone_number, id_user FROM company WHERE id_user = ?");
             preparedStatement.setInt(1, userId);
 
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                result.add(findCompanyById(resultSet.getInt(1)));
+                result.add(new Company(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getString(4), resultSet.getString(5), userDao.findUserById(resultSet.getInt(6))));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -55,25 +65,27 @@ public class CompanyDao extends AbstractDao {
         return result;
     }
 
-    //TODO!!!!!!!!!!!!
-    public boolean saveCompany(Company company, Integer userId) {
+    public boolean saveCompany(Company company) {
         try {
             PreparedStatement statement;
             if (company.getId() == null) {
-                statement = connection.prepareStatement("INSERT INTO company (name, address, email, phone_number) VALUES (?, ?, ?, ?)");
+                statement = connection.prepareStatement("INSERT INTO company (name, address, email, phone_number, id_user) VALUES (?, ?, ?, ?, ?)");
                 statement.setString(1, company.getName());
                 statement.setString(2, company.getAddress());
                 statement.setString(3, company.getEmail());
                 statement.setString(4, company.getPhoneNumber());
-                statement.execute();
-
-                statement = connection.prepareStatement("INSERT INTO user_company (id_user, id_company) VALUES (?, ?)");
-                statement.setInt(1, userId);
-                statement.setInt(2, company.getId());//TODO у компании еще нет id
-
-                return true;
+                statement.setInt(5, company.getUser().getId());
+            } else {
+                statement = connection.prepareStatement("UPDATE company SET name=?, address=?, email=?, phone_number=?, id_user=? WHERE id=?");
+                statement.setString(1, company.getName());
+                statement.setString(2, company.getAddress());
+                statement.setString(3, company.getEmail());
+                statement.setString(4, company.getPhoneNumber());
+                statement.setInt(5, company.getUser().getId());
+                statement.setInt(6, company.getId());
             }
-            return false;
+            statement.execute();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

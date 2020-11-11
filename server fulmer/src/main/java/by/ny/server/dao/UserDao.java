@@ -3,6 +3,7 @@ package by.ny.server.dao;
 import by.ny.server.entity.User;
 import by.ny.server.entity.UserRole;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao extends AbstractDao {
+    private UserDao() {
+    }
+
+    private static class Holder {
+        public static UserDao instance = new UserDao();
+    }
+
+    public static UserDao getInstance() {
+        return Holder.instance;
+    }
+
 
     public User findUserByLogin(String login) {
         try {
@@ -124,26 +136,20 @@ public class UserDao extends AbstractDao {
                 statement.setString(5, user.getPhoneNumber());
                 statement.setString(6, user.getRole().toString());
                 statement.setString(7, user.getEmail());
-                statement.execute();
-                return true;
+            } else {
+                statement = connection.prepareStatement("UPDATE user SET surname=?, name=?, login=?, password=?, " +
+                        "phone_number=?, role=?, email=? WHERE id=?");
+                statement.setString(1, user.getSurname());
+                statement.setString(2, user.getName());
+                statement.setString(3, user.getLogin());
+                statement.setString(4, user.getPassword());
+                statement.setString(5, user.getPhoneNumber());
+                statement.setString(6, user.getRole().toString());
+                statement.setString(7, user.getEmail());
+                statement.setInt(8, user.getId());
             }
-            /*
-            else {
-                statement = connection.prepareStatement("UPDATE user SET first_name=?, last_name=?, middle_name=?, passport_number=?, role=?, password=? WHERE id=?");
-                statement.setString(1, user.getFirstName());
-                statement.setString(2, user.getLastName());
-                statement.setString(3, user.getMiddleName());
-                statement.setString(4, user.getPassportNumber());
-                statement.setString(5, user.getRole().toString());
-                statement.setString(6, user.getPassword());
-                statement.setInt(7, user.getId());
-            }
-            */
-            /*
             statement.execute();
             return true;
-             */
-            return false;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

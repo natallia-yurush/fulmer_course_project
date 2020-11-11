@@ -7,6 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DollarRateDao extends AbstractDao {
+    private DollarRateDao() {
+    }
+
+    private static class Holder {
+        public static DollarRateDao instance = new DollarRateDao();
+    }
+
+    public static DollarRateDao getInstance() {
+        return DollarRateDao.Holder.instance;
+    }
 
     public DollarRate findLastDollarRate() {
         try {

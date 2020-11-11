@@ -10,13 +10,15 @@ public class Company implements Serializable {
     private String address;
     private String email;
     private String phoneNumber;
+    private User user;
 
-    public Company(Integer id, String name, String address, String email, String phoneNumber) {
+    public Company(Integer id, String name, String address, String email, String phoneNumber, User user) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.user = user;
     }
 
     public Integer getId() {
@@ -57,5 +59,13 @@ public class Company implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

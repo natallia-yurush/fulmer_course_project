@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.8" prefWidth="700.0" style="-fx-background-color: #F0F8FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.ny.client.controller.CompanyTabController">
+   <children>
+      <TableView fx:id="companyTable" layoutX="17.0" layoutY="14.0" prefHeight="142.0" prefWidth="665.0" style="-fx-border-color: #5F9EA0;">
+         <columns>
+            <TableColumn fx:id="companyIdColumn" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="companyNameColumn" prefWidth="126.39996337890625" text="Название" />
+            <TableColumn fx:id="companyAddressColumn" prefWidth="190.3999481201172" text="Адрес" />
+            <TableColumn fx:id="companyPhoneNumberColumn" prefWidth="128.0" text="Номер телефона" />
+            <TableColumn fx:id="companyEmailColumn" prefWidth="149.5999755859375" text="Email" />
+         </columns>
+      </TableView>
+      <Label layoutX="17.0" layoutY="187.0" text="Название:" textFill="#0b1549">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="233.0" text="Адрес:" textFill="#0b1549">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="287.0" text="Номер телефона:" textFill="#0b1549">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="338.0" text="Email:" textFill="#0b1549">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nameField" layoutX="109.0" layoutY="182.0" prefHeight="30.0" prefWidth="288.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="addressField" layoutX="109.0" layoutY="228.0" prefHeight="30.0" prefWidth="288.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="phoneNumberField" layoutX="167.0" layoutY="282.0" prefHeight="30.0" prefWidth="229.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="emailField" layoutX="109.0" layoutY="333.0" prefHeight="30.0" prefWidth="288.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Button fx:id="deleteButton" layoutX="608.0" layoutY="333.0" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="31.0" prefWidth="74.0" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Удалить">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="saveButton" layoutX="418.0" layoutY="332.0" mnemonicParsing="false" onAction="#saveButtonAction" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Сохранить">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="clearButton" layoutX="513.0" layoutY="332.0" mnemonicParsing="false" onAction="#clearButtonAction" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Очистить">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="calculationButton" layoutX="552.0" layoutY="166.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="129.0" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Рассчитать">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

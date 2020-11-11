@@ -45,25 +45,7 @@ public class RegistrationController {
     private TextField phoneNumberField;
 
     public void registration(ActionEvent actionEvent) {
-        if (nameField.getText().trim().isEmpty() || surnameField.getText().trim().isEmpty() ||
-                loginField.getText().trim().isEmpty() ||
-                passwordField.getText().trim().isEmpty() ||
-                emailField.getText().trim().isEmpty() || phoneNumberField.getText().trim().isEmpty()) {
-            InformationDialog.viewMessage("Заполните, пожалуйста, все поля!");
-            return;
-        }
-        if (!Validator.isCorrectEmail(emailField.getText())) {
-            InformationDialog.viewMessage("Некорректно введен email.");
-            return;
-        } else if (!Validator.isCorrectLogin(loginField.getText())) {
-            InformationDialog.viewMessage("Логин слишком длинный! Придумайте новый.");
-            return;
-        } else if (!Validator.isCorrectPassword(passwordField.getText())) {
-            InformationDialog.viewMessage("Неправильный тип пароля! Должно быть не менее 8 символов, " +
-                    "не менее 1 заглавной буквы, 1 строчной буквы и 1 цифры");
-            return;
-        } else if (!Validator.isCorrectPhoneNumber(phoneNumberField.getText())) {
-            InformationDialog.viewMessage("Некорректно введен номер.");
+        if(!isValid()) {
             return;
         }
 
@@ -94,6 +76,31 @@ public class RegistrationController {
             Logger.getLogger(AuthorizationController.class.getName()).log(Level.SEVERE, null, e);
         }
 
+    }
+
+    private boolean isValid() {
+        if (nameField.getText().trim().isEmpty() || surnameField.getText().trim().isEmpty() ||
+                loginField.getText().trim().isEmpty() ||
+                passwordField.getText().trim().isEmpty() ||
+                emailField.getText().trim().isEmpty() || phoneNumberField.getText().trim().isEmpty()) {
+            InformationDialog.viewMessage("Заполните, пожалуйста, все поля!");
+            return false;
+        }
+        if (!Validator.isCorrectEmail(emailField.getText())) {
+            InformationDialog.viewMessage("Некорректно введен email.");
+            return false;
+        } else if (!Validator.isCorrectLogin(loginField.getText())) {
+            InformationDialog.viewMessage("Логин слишком длинный! Придумайте новый.");
+            return false;
+        } else if (!Validator.isCorrectPassword(passwordField.getText())) {
+            InformationDialog.viewMessage("Неправильный тип пароля! Должно быть не менее 8 символов, " +
+                    "не менее 1 заглавной буквы, 1 строчной буквы и 1 цифры");
+            return false;
+        } else if (!Validator.isCorrectPhoneNumber(phoneNumberField.getText())) {
+            InformationDialog.viewMessage("Некорректно введен номер.");
+            return false;
+        }
+        return true;
     }
 
 }

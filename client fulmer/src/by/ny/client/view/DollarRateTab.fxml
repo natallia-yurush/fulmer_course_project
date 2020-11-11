@@ -2,12 +2,11 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="696.0" style="-fx-background-color: #F0F8FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.ny.client.controller.DollarRateTabController">
    <children>
@@ -26,16 +25,6 @@
             <Font name="System Italic" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="eurField" layoutX="245.0" layoutY="93.0" style="-fx-border-radius: 5;">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="bynField" layoutX="245.0" layoutY="154.0" style="-fx-border-radius: 5;">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextField>
       <Label layoutX="190.0" layoutY="239.0" text="История изменения курса доллара" textFill="#23345c">
          <font>
             <Font name="System Bold Italic" size="18.0" />
@@ -48,10 +37,12 @@
             <TableColumn fx:id="bynColumn" prefWidth="210.4000244140625" text="BYN" />
         </columns>
       </TableView>
-      <Button fx:id="addButton" layoutX="460.0" layoutY="120.0" mnemonicParsing="false" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Добавить">
+      <Button fx:id="addButton" layoutX="460.0" layoutY="120.0" mnemonicParsing="false" onAction="#addDollarRate" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Добавить">
          <font>
             <Font name="System Italic" size="13.0" />
          </font>
       </Button>
+      <Spinner fx:id="eurSpinner" layoutX="245.0" layoutY="93.0" prefHeight="31.0" prefWidth="186.0" />
+      <Spinner fx:id="bynSpinner" layoutX="245.0" layoutY="154.0" prefHeight="31.0" prefWidth="186.0" />
    </children>
 </AnchorPane>

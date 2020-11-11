@@ -1,20 +1,20 @@
 package by.ny.server;
 
+import by.ny.server.controller.command.company.DeleteCompanyCommand;
 import by.ny.server.controller.command.company.ListCompaniesCommand;
+import by.ny.server.controller.command.company.SaveCompanyCommand;
 import by.ny.server.controller.command.dollarrate.ListDollarRatesCommand;
-import by.ny.server.controller.command.user.AuthorizationCommand;
-import by.ny.server.controller.command.user.DeleteUserCommand;
-import by.ny.server.controller.command.user.ListUsersCommand;
-import by.ny.server.controller.command.user.RegistrationCommand;
+import by.ny.server.controller.command.dollarrate.SaveDollarRateCommand;
+import by.ny.server.controller.command.user.*;
 import by.ny.server.controller.result.company.ListCompaniesResult;
+import by.ny.server.controller.result.company.UpdateCompanyStatusResult;
 import by.ny.server.controller.result.dollarrate.ListDollarRateResult;
+import by.ny.server.controller.result.dollarrate.SaveDollarRateResult;
 import by.ny.server.controller.result.user.AuthorizationResult;
 import by.ny.server.controller.result.user.ListUsersResult;
 import by.ny.server.controller.result.user.RegistrationResult;
 import by.ny.server.controller.result.user.UpdateUserStatusResult;
-import by.ny.server.dao.CompanyDao;
-import by.ny.server.dao.DollarRateDao;
-import by.ny.server.dao.UserDao;
+import by.ny.server.entity.DollarRate;
 import by.ny.server.entity.RegistrationStatus;
 import by.ny.server.entity.User;
 import by.ny.server.service.*;
@@ -28,14 +28,11 @@ import java.util.logging.Logger;
 
 public class Main {
     public static void main(String[] args) {
-        final UserDao userDao = new UserDao(); //TODO singleton
-        final DollarRateDao dollarRateDao = new DollarRateDao();
-        final CompanyDao companyDao = new CompanyDao();
-        final UserService userService = new UserService(userDao);
-        final RegistrationService registrationService = new RegistrationService(userDao);
-        final AuthorizationService authorizationService = new AuthorizationService(userDao);
-        final DollarRateService dollarRateService = new DollarRateService(dollarRateDao);
-        final CompanyService companyService = new CompanyService(companyDao);
+        final UserService userService = new UserService();
+        final RegistrationService registrationService = new RegistrationService();
+        final AuthorizationService authorizationService = new AuthorizationService();
+        final DollarRateService dollarRateService = new DollarRateService();
+        final CompanyService companyService = new CompanyService();
 
         try (ServerSocket ss = new ServerSocket(3333)) {
             while (true) {
@@ -81,6 +78,27 @@ public class Main {
                         } else if (command instanceof ListCompaniesCommand) {
                             ListCompaniesResult result = new ListCompaniesResult(companyService
                                     .listUsersCompanies(((ListCompaniesCommand) command).getUserId()));
+                            outputStream.writeObject(result);
+                        } else if (command instanceof SaveDollarRateCommand) {
+                            SaveDollarRateCommand saveDollarRateCommand = (SaveDollarRateCommand) command;
+                            DollarRate dollarRate = saveDollarRateCommand.getDollarRate();
+                            SaveDollarRateResult result = new SaveDollarRateResult(dollarRateService.saveDollarRate(dollarRate));
+                            outputStream.writeObject(result);
+                        } else if (command instanceof SaveUserCommand) {
+                            SaveUserCommand saveUserCommand = (SaveUserCommand) command;
+                            outputStream.writeObject(registrationService.registration(saveUserCommand.getUser().getLogin(), saveUserCommand.getUser().getEmail()));
+                            boolean success = userService.saveUser(saveUserCommand.getUser());
+                            UpdateUserStatusResult result = new UpdateUserStatusResult(success);
+                            outputStream.writeObject(result);
+                        } else if (command instanceof SaveCompanyCommand) {
+                            SaveCompanyCommand saveCompanyCommand = (SaveCompanyCommand) command;
+                            UpdateCompanyStatusResult updateCompanyStatusResult = new UpdateCompanyStatusResult(companyService.
+                                    saveCompany(saveCompanyCommand.getCompany()));
+                            outputStream.writeObject(updateCompanyStatusResult);
+                        } else if (command instanceof DeleteCompanyCommand) {
+                            DeleteCompanyCommand deleteCompanyCommand = (DeleteCompanyCommand) command;
+                            boolean success = companyService.deleteCompany(deleteCompanyCommand.getCompanyId());
+                            UpdateCompanyStatusResult result = new UpdateCompanyStatusResult(success);
                             outputStream.writeObject(result);
                         }
 

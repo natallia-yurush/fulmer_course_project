@@ -6,11 +6,7 @@ import by.ny.server.entity.DollarRate;
 import java.util.List;
 
 public class DollarRateService {
-    private DollarRateDao dollarRateDao;
-
-    public DollarRateService (DollarRateDao dollarRateDao) {
-        this.dollarRateDao = dollarRateDao;
-    }
+    private DollarRateDao dollarRateDao = DollarRateDao.getInstance();
 
     public List<DollarRate> listRates() {
         return dollarRateDao.listRates();
