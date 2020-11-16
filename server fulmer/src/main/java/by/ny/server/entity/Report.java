@@ -6,17 +6,17 @@ import java.util.Date;
 public class Report implements Serializable {
     private static final long serialVersionUID = -8372756804772618469L;
 
+    private Integer id;
     private Date date;
-    private int id;
-    private double x1, x2, x3, x4, x5, x6, x7, x8, x9;
-    private double result;
+    private Double x1, x2, x3, x4, x5, x6, x7, x8, x9;
+    private Double result;
     private DollarRate dollarRate;
     private Company company;
+    private Currency currency;
 
-    public Report(Date date, int id, double x1, double x2, double x3, double x4, double x5, double x6,
-                  double x7, double x8, double x9, double result, DollarRate dollarRate, Company company) {
-        this.date = date;
+    public Report(Integer id, Company company, DollarRate dollarRate, Date date, Double x1, Double x2, Double x3, Double x4, Double x5, Double x6, Double x7, Double x8, Double x9, Double result,Currency currency) {
         this.id = id;
+        this.date = date;
         this.x1 = x1;
         this.x2 = x2;
         this.x3 = x3;
@@ -29,6 +29,15 @@ public class Report implements Serializable {
         this.result = result;
         this.dollarRate = dollarRate;
         this.company = company;
+        this.currency = currency;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Date getDate() {
@@ -39,91 +48,83 @@ public class Report implements Serializable {
         this.date = date;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public double getX1() {
+    public Double getX1() {
         return x1;
     }
 
-    public void setX1(double x1) {
+    public void setX1(Double x1) {
         this.x1 = x1;
     }
 
-    public double getX2() {
+    public Double getX2() {
         return x2;
     }
 
-    public void setX2(double x2) {
+    public void setX2(Double x2) {
         this.x2 = x2;
     }
 
-    public double getX3() {
+    public Double getX3() {
         return x3;
     }
 
-    public void setX3(double x3) {
+    public void setX3(Double x3) {
         this.x3 = x3;
     }
 
-    public double getX4() {
+    public Double getX4() {
         return x4;
     }
 
-    public void setX4(double x4) {
+    public void setX4(Double x4) {
         this.x4 = x4;
     }
 
-    public double getX5() {
+    public Double getX5() {
         return x5;
     }
 
-    public void setX5(double x5) {
+    public void setX5(Double x5) {
         this.x5 = x5;
     }
 
-    public double getX6() {
+    public Double getX6() {
         return x6;
     }
 
-    public void setX6(double x6) {
+    public void setX6(Double x6) {
         this.x6 = x6;
     }
 
-    public double getX7() {
+    public Double getX7() {
         return x7;
     }
 
-    public void setX7(double x7) {
+    public void setX7(Double x7) {
         this.x7 = x7;
     }
 
-    public double getX8() {
+    public Double getX8() {
         return x8;
     }
 
-    public void setX8(double x8) {
+    public void setX8(Double x8) {
         this.x8 = x8;
     }
 
-    public double getX9() {
+    public Double getX9() {
         return x9;
     }
 
-    public void setX9(double x9) {
+    public void setX9(Double x9) {
         this.x9 = x9;
     }
 
-    public double getResult() {
+    public Double getResult() {
         return result;
     }
 
-    public void setResult(double result) {
+    public void setResult(Double result) {
         this.result = result;
     }
 
@@ -141,5 +142,13 @@ public class Report implements Serializable {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 }

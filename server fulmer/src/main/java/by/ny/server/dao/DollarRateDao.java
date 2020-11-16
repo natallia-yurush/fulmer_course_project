@@ -1,6 +1,9 @@
 package by.ny.server.dao;
 
+import by.ny.server.entity.Company;
 import by.ny.server.entity.DollarRate;
+import by.ny.server.entity.User;
+import by.ny.server.entity.UserRole;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -70,5 +73,25 @@ public class DollarRateDao extends AbstractDao {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public DollarRate findDollarRateById(Integer id) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("SELECT id, date, EUR, BYN FROM dollar_rate WHERE id=?");
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return new DollarRate(resultSet.getInt(1), resultSet.getDate(2),
+                        resultSet.getDouble(3), resultSet.getDouble(4));
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

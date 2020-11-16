@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.NumberAxis?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.ny.client.controller.OddsChartController">
+<children>
+    <Button fx:id="exitBarChart" layoutX="274.0" layoutY="343.0" mnemonicParsing="false" onAction="#exitChart" text="OK" />
+    <BarChart fx:id="barChart" layoutX="103.0" layoutY="31.0" prefHeight="292.0" prefWidth="394.0" title="Коэффициенты отчета">
+        <xAxis>
+            <CategoryAxis side="BOTTOM" fx:id="xAxis" />
+        </xAxis>
+        <yAxis>
+            <NumberAxis fx:id="yAxis" side="LEFT" />
+        </yAxis>
+    </BarChart>
+</children>
+</AnchorPane>

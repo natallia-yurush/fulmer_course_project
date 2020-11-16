@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class StatisticResult implements Serializable {
     private static final long serialVersionUID = 3606454483849255736L;
 
-    private int numberOfUsers;
-    private int numberOfCompanies;
-    private int numberOfReports;
+    private Integer numberOfUsers;
+    private Integer numberOfCompanies;
+    private Integer numberOfReports;
 
     public StatisticResult(int numberOfUsers, int numberOfCompanies, int numberOfReports) {
         this.numberOfUsers = numberOfUsers;
@@ -15,7 +15,7 @@ public class StatisticResult implements Serializable {
         this.numberOfReports = numberOfReports;
     }
 
-    public int getNumberOfUsers() {
+    public Integer getNumberOfUsers() {
         return numberOfUsers;
     }
 
@@ -23,7 +23,7 @@ public class StatisticResult implements Serializable {
         this.numberOfUsers = numberOfUsers;
     }
 
-    public int getNumberOfCompanies() {
+    public Integer getNumberOfCompanies() {
         return numberOfCompanies;
     }
 
@@ -31,7 +31,7 @@ public class StatisticResult implements Serializable {
         this.numberOfCompanies = numberOfCompanies;
     }
 
-    public int getNumberOfReports() {
+    public Integer getNumberOfReports() {
         return numberOfReports;
     }
 

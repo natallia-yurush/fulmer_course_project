@@ -1,4 +1,4 @@
-package by.ny.client.util;
+package by.ny.client.dialog;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

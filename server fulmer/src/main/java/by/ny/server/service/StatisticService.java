@@ -1,9 +1,31 @@
 package by.ny.server.service;
 
+import by.ny.server.entity.Company;
+
 public class StatisticService {
-    /*UserService service = new UserService();//TODO Singleton
+    private StatisticService() {
+    }
 
-    public int[] statisticResult(UserService userService, ) {
+    public int numberOfUsersResult() {
+        UserService userService = UserService.getInstance();
+        return userService.listUsers().size();
+    }
 
-    }*/
+    public int numberOfCompaniesResult() {
+        CompanyService companyService = CompanyService.getInstance();
+        return companyService.listCompanies().size();
+    }
+
+    public int numberOfReportsResult() {
+        ReportService reportService = ReportService.getInstance();
+        return reportService.listReports().size();
+    }
+
+    private static class Holder {
+        public static StatisticService instance = new StatisticService();
+    }
+
+    public static StatisticService getInstance() {
+        return StatisticService.Holder.instance;
+    }
 }

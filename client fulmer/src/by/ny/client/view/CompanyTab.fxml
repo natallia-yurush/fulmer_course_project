@@ -74,7 +74,12 @@
             <Font name="System Italic" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="calculationButton" layoutX="552.0" layoutY="166.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="129.0" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Рассчитать">
+      <Button fx:id="calculationButton" layoutX="522.0" layoutY="166.0" mnemonicParsing="false" onAction="#calculationButtonAction" prefHeight="31.0" prefWidth="160.0" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Рассчитать">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="reportsButton" layoutX="522.0" layoutY="212.0" mnemonicParsing="false" onAction="#reportsButtonAction" prefHeight="31.0" prefWidth="160.0" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Управление отчетами">
          <font>
             <Font name="System Italic" size="13.0" />
          </font>

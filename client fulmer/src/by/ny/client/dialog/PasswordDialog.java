@@ -1,4 +1,4 @@
-package by.ny.client.util;
+package by.ny.client.dialog;
 
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -40,14 +40,5 @@ public class PasswordDialog extends Dialog<String> {
         });
     }
 
-    public PasswordField getPasswordField() {
-        return passwordField;
-    }
 }
 
-/*
-        PasswordDialog pd = new PasswordDialog();
-        Optional<String> result = pd.showAndWait();
-        result.ifPresent(password -> System.out.println(password));
-
- */

@@ -4,6 +4,9 @@ import by.ny.server.dao.UserDao;
 import by.ny.server.entity.RegistrationStatus;
 
 public class RegistrationService {
+    private RegistrationService() {
+    }
+
     private UserDao userDao = UserDao.getInstance();
 
     public RegistrationStatus registration(String login, String email) {
@@ -14,5 +17,13 @@ public class RegistrationService {
             return RegistrationStatus.EXISTING_LOGIN;
         }
         return RegistrationStatus.REGISTERED;
+    }
+
+    private static class Holder {
+        public static RegistrationService instance = new RegistrationService();
+    }
+
+    public static RegistrationService getInstance() {
+        return RegistrationService.Holder.instance;
     }
 }

@@ -1,7 +1,7 @@
 package by.ny.client.controller;
 
 import by.ny.client.ConnectionUtil;
-import by.ny.client.util.InformationDialog;
+import by.ny.client.dialog.InformationDialog;
 import by.ny.server.controller.command.dollarrate.ListDollarRatesCommand;
 import by.ny.server.controller.command.dollarrate.SaveDollarRateCommand;
 import by.ny.server.controller.result.dollarrate.ListDollarRateResult;

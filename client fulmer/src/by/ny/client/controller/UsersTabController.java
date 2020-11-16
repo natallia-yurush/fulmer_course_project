@@ -1,8 +1,8 @@
 package by.ny.client.controller;
 
 import by.ny.client.ConnectionUtil;
-import by.ny.client.util.ConfirmationDialog;
-import by.ny.client.util.InformationDialog;
+import by.ny.client.dialog.ConfirmationDialog;
+import by.ny.client.dialog.InformationDialog;
 import by.ny.server.controller.command.company.ListCompaniesCommand;
 import by.ny.server.controller.command.user.DeleteUserCommand;
 import by.ny.server.controller.command.user.ListUsersCommand;

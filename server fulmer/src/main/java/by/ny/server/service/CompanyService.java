@@ -6,10 +6,17 @@ import by.ny.server.entity.Company;
 import java.util.List;
 
 public class CompanyService {
+    private CompanyService() {
+    }
+
     private CompanyDao companyDao = CompanyDao.getInstance();
 
     public List<Company> listUsersCompanies(Integer userId) {
         return companyDao.listUsersCompanies(userId);
+    }
+
+    public List<Company> listCompanies() {
+        return companyDao.listCompanies();
     }
 
     public Company getCompanyById(Integer id) {
@@ -24,4 +31,11 @@ public class CompanyService {
         return companyDao.saveCompany(company);
     }
 
+    private static class Holder {
+        public static CompanyService instance = new CompanyService();
+    }
+
+    public static CompanyService getInstance() {
+        return CompanyService.Holder.instance;
+    }
 }

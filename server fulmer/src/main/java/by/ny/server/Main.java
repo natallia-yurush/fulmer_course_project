@@ -1,15 +1,24 @@
 package by.ny.server;
 
+import by.ny.server.controller.command.StatisticCommand;
 import by.ny.server.controller.command.company.DeleteCompanyCommand;
 import by.ny.server.controller.command.company.ListCompaniesCommand;
 import by.ny.server.controller.command.company.SaveCompanyCommand;
 import by.ny.server.controller.command.dollarrate.ListDollarRatesCommand;
 import by.ny.server.controller.command.dollarrate.SaveDollarRateCommand;
+import by.ny.server.controller.command.report.ListReportsCommand;
+import by.ny.server.controller.command.report.SavePdfReportCommand;
+import by.ny.server.controller.command.report.SaveReportCommand;
+import by.ny.server.controller.command.report.SaveTxtReportCommand;
 import by.ny.server.controller.command.user.*;
+import by.ny.server.controller.result.StatisticResult;
 import by.ny.server.controller.result.company.ListCompaniesResult;
 import by.ny.server.controller.result.company.UpdateCompanyStatusResult;
 import by.ny.server.controller.result.dollarrate.ListDollarRateResult;
 import by.ny.server.controller.result.dollarrate.SaveDollarRateResult;
+import by.ny.server.controller.result.report.ListReportsResult;
+import by.ny.server.controller.result.report.SaveReportResult;
+import by.ny.server.controller.result.report.SaveTxtPdfReportResult;
 import by.ny.server.controller.result.user.AuthorizationResult;
 import by.ny.server.controller.result.user.ListUsersResult;
 import by.ny.server.controller.result.user.RegistrationResult;
@@ -28,11 +37,13 @@ import java.util.logging.Logger;
 
 public class Main {
     public static void main(String[] args) {
-        final UserService userService = new UserService();
-        final RegistrationService registrationService = new RegistrationService();
-        final AuthorizationService authorizationService = new AuthorizationService();
-        final DollarRateService dollarRateService = new DollarRateService();
-        final CompanyService companyService = new CompanyService();
+        final UserService userService = UserService.getInstance();
+        final RegistrationService registrationService = RegistrationService.getInstance();
+        final AuthorizationService authorizationService = AuthorizationService.getInstance();
+        final DollarRateService dollarRateService = DollarRateService.getInstance();
+        final CompanyService companyService = CompanyService.getInstance();
+        final ReportService reportService = ReportService.getInstance();
+        final StatisticService statisticService = StatisticService.getInstance();
 
         try (ServerSocket ss = new ServerSocket(3333)) {
             while (true) {
@@ -100,6 +111,29 @@ public class Main {
                             boolean success = companyService.deleteCompany(deleteCompanyCommand.getCompanyId());
                             UpdateCompanyStatusResult result = new UpdateCompanyStatusResult(success);
                             outputStream.writeObject(result);
+                        } else if (command instanceof SaveReportCommand) {
+                            SaveReportCommand saveReportCommand = (SaveReportCommand) command;
+                            SaveReportResult saveReportResult = new SaveReportResult(reportService.saveReport(saveReportCommand.getReport()));
+                            outputStream.writeObject(saveReportResult);
+                        }
+                        /*
+                        else if (command instanceof SaveTxtReportCommand) {
+                            SaveTxtReportCommand saveTxtReportCommand = (SaveTxtReportCommand) command;
+                            SaveTxtPdfReportResult result = new SaveTxtPdfReportResult(reportService.saveTxtReport(saveTxtReportCommand.getReport()));
+                            outputStream.writeObject(result);
+                        } else if (command instanceof SavePdfReportCommand) {
+                            SavePdfReportCommand saveTxtReportCommand = (SavePdfReportCommand) command;
+                            SaveTxtPdfReportResult result = new SaveTxtPdfReportResult(reportService.savePdfReport(saveTxtReportCommand.getReport()));
+                            outputStream.writeObject(result);
+                        }
+                        */
+                        else if (command instanceof StatisticCommand) {
+                            StatisticResult statisticResult = new StatisticResult(statisticService.numberOfUsersResult(), statisticService.numberOfCompaniesResult(), statisticService.numberOfReportsResult());
+                            outputStream.writeObject(statisticResult);
+                        } else if (command instanceof ListReportsCommand) {
+                            ListReportsCommand listReportsCommand = (ListReportsCommand) command;
+                            ListReportsResult listReportsResult = new ListReportsResult(reportService.listCompaniesReports(listReportsCommand.getCompanyId()));
+                            outputStream.writeObject(listReportsResult);
                         }
 
 

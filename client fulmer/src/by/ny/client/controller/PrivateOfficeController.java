@@ -2,8 +2,8 @@ package by.ny.client.controller;
 
 import by.ny.client.ConnectionUtil;
 import by.ny.client.CurrentUserUtil;
-import by.ny.client.util.InformationDialog;
-import by.ny.client.util.PasswordDialog;
+import by.ny.client.dialog.InformationDialog;
+import by.ny.client.dialog.PasswordDialog;
 import by.ny.client.util.Validator;
 import by.ny.server.controller.command.user.SaveUserCommand;
 import by.ny.server.controller.result.user.UpdateUserStatusResult;

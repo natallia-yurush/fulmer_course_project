@@ -4,6 +4,9 @@ import by.ny.server.dao.UserDao;
 import by.ny.server.entity.User;
 
 public class AuthorizationService {
+    private AuthorizationService() {
+    }
+
     private UserDao userDao = UserDao.getInstance();
 
     public User authenticate(String login, String password) {
@@ -14,5 +17,13 @@ public class AuthorizationService {
         } else {
             return null;
         }
+    }
+
+    private static class Holder {
+        public static AuthorizationService instance = new AuthorizationService();
+    }
+
+    public static AuthorizationService getInstance() {
+        return AuthorizationService.Holder.instance;
     }
 }

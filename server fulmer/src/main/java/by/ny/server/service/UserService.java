@@ -6,6 +6,9 @@ import by.ny.server.entity.User;
 import java.util.List;
 
 public class UserService {
+    private UserService() {
+    }
+
     private UserDao userDao = UserDao.getInstance();
 
     public List<User> listUsers() {
@@ -22,5 +25,13 @@ public class UserService {
 
     public boolean saveUser(User user) {
         return userDao.saveUser(user);
+    }
+
+    private static class Holder {
+        public static UserService instance = new UserService();
+    }
+
+    public static UserService getInstance() {
+        return UserService.Holder.instance;
     }
 }

@@ -2,8 +2,8 @@ package by.ny.client.controller;
 
 import by.ny.client.ConnectionUtil;
 import by.ny.client.CurrentUserUtil;
-import by.ny.client.util.ConfirmationDialog;
-import by.ny.client.util.InformationDialog;
+import by.ny.client.dialog.ConfirmationDialog;
+import by.ny.client.dialog.InformationDialog;
 import by.ny.client.util.Validator;
 import by.ny.server.controller.command.company.DeleteCompanyCommand;
 import by.ny.server.controller.command.company.ListCompaniesCommand;
@@ -17,10 +17,15 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.VirtualFlow;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -79,19 +84,18 @@ public class CompanyTabController {
     @FXML
     private Button calculationButton;
 
+    @FXML
+    private Button reportsButton;
+
     private VirtualFlow flow;
 
-    //private
-
-    private Company selectedCompany;
+    private static Company selectedCompany;
 
     @FXML
     void initialize() {
         reloadCompaniesTableData();
 
-        //TODO когда выбирается строка из таблицы -> выводится новая таблица компаний
-
-
+        //когда выбирается строка из таблицы -> выводится новая таблица компаний
         companyTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Company>() {
             @Override
             public void changed(ObservableValue<? extends Company> observable, Company oldValue, Company newValue) {
@@ -100,12 +104,12 @@ public class CompanyTabController {
                     changeValues();
             }
         });
-
-
     }
 
     public void reloadCompaniesTableData() {
         deleteButton.disableProperty().bind(Bindings.isEmpty(companyTable.getSelectionModel().getSelectedItems()));
+        calculationButton.disableProperty().bind(Bindings.isEmpty(companyTable.getSelectionModel().getSelectedItems()));
+        reportsButton.disableProperty().bind(Bindings.isEmpty(companyTable.getSelectionModel().getSelectedItems()));
 
         try {
             Socket socket = ConnectionUtil.getSocket();
@@ -138,7 +142,6 @@ public class CompanyTabController {
         addressField.setText(selectedCompany.getAddress());
         phoneNumberField.setText(selectedCompany.getPhoneNumber());
         emailField.setText(selectedCompany.getEmail());
-       // deleteButton.setDisable(false);
     }
 
     public void saveButtonAction() {
@@ -224,4 +227,37 @@ public class CompanyTabController {
         }
         return true;
     }
+
+    public static Company getSelectedCompany() {
+        return selectedCompany;
+    }
+
+    public void calculationButtonAction() {
+        Stage stage = new Stage();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/by/ny/client/view/CalculationWindow.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setTitle("Расчет");
+        stage.setResizable(false);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    public void reportsButtonAction() {
+        Stage stage = new Stage();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/by/ny/client/view/ReportsWindow.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setTitle("Управление отчетами");
+        stage.setResizable(false);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
 }

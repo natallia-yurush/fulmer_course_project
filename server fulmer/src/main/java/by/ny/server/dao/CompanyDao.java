@@ -31,13 +31,14 @@ public class CompanyDao extends AbstractDao {
                 preparedStatement.setInt(1, id);
 
                 resultSet = preparedStatement.executeQuery();
-            }
 
-            if (resultSet.next()) {
-                return new Company(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
-                        resultSet.getString(4), resultSet.getString(5), userDao.findUserById(resultSet.getInt(6)));
-            } else {
-                return null;
+
+                if (resultSet.next()) {
+                    return new Company(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                            resultSet.getString(4), resultSet.getString(5), userDao.findUserById(resultSet.getInt(6)));
+                } else {
+                    return null;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -102,5 +103,23 @@ public class CompanyDao extends AbstractDao {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public List<Company> listCompanies() {
+        List<Company> result = new ArrayList<>();
+        try {
+            ResultSet resultSet;
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("SELECT id, name, address, email, phone_number, id_user FROM company");
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                result.add(new Company(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getString(4), resultSet.getString(5), userDao.findUserById(resultSet.getInt(6))));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }
