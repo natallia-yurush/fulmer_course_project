@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="696.0" style="-fx-background-color: #F0F8FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.ny.client.controller.ReportsController">
+   <children>
+      <TableView fx:id="reportsTable" layoutX="14.0" layoutY="70.0" prefHeight="229.0" prefWidth="666.0">
+        <columns>
+          <TableColumn fx:id="dateColumn" prefWidth="90.39999389648438" text="Дата" />
+          <TableColumn minWidth="0.800018310546875" prefWidth="48.79998779296875" text="x1" fx:id="x1Column" />
+            <TableColumn prefWidth="44.79998779296875" text="x2" fx:id="x2Column" />
+            <TableColumn prefWidth="53.5999755859375" text="x3" fx:id="x3Column" />
+            <TableColumn prefWidth="56.79998779296875" text="x4" fx:id="x4Column" />
+            <TableColumn prefWidth="52.79998779296875" text="x5" fx:id="x5Column" />
+            <TableColumn prefWidth="56.0" text="x6" fx:id="x6Column" />
+            <TableColumn prefWidth="54.39996337890625" text="x7" fx:id="x7Column" />
+            <TableColumn prefWidth="54.39996337890625" text="x8" fx:id="x8Column" />
+            <TableColumn prefWidth="55.199951171875" text="x9" fx:id="x9Column" />
+            <TableColumn fx:id="resultColumn" prefWidth="105.5999755859375" text="Результат" />
+        </columns>
+      </TableView>
+      <DatePicker fx:id="calendar" layoutX="15.0" layoutY="26.0" prefHeight="31.0" prefWidth="177.0" promptText="выберите дату" />
+      <Button fx:id="searchButton" layoutX="206.0" layoutY="26.0" mnemonicParsing="false" onAction="#searchButtonAction" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Поиск">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="resultsChartButton" layoutX="86.0" layoutY="332.0" mnemonicParsing="false" onAction="#resultsChartButtonAction" prefHeight="31.0" prefWidth="239.0" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Диаграмма по результатам">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="oddsChartButton" layoutX="385.0" layoutY="332.0" mnemonicParsing="false" onAction="#oddsChartButtonAction" prefHeight="31.0" prefWidth="239.0" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Диаграмма по коэффициентам">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="clearButton" layoutX="624.0" layoutY="26.0" mnemonicParsing="false" onAction="#clearButtonAction" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Сброс">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

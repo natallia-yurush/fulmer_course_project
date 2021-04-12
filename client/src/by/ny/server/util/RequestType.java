@@ -1,0 +1,17 @@
+package by.ny.server.util;
+
+public enum RequestType {
+    DELETE_COMPANY,
+    COMPANIES_LIST,
+    SAVE_COMPANY,
+    DOLLAR_RATES_LIST,
+    SAVE_DOLLAR_RATE,
+    REPORTS_LIST,
+    SAVE_REPORT,
+    AUTHORIZATION,
+    DELETE_USER,
+    USERS_LIST,
+    REGISTRATION,
+    SAVE_USER,
+    STATISTIC
+}

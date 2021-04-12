@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0"
+         prefWidth="698.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1"
+         xmlns="http://javafx.com/javafx/11.0.1">
+    <tabs>
+        <Tab fx:id="usersTab" text="Пользователи">
+            <fx:include source="UsersTab.fxml"></fx:include>
+        </Tab>
+
+        <Tab fx:id="dollarRateTab" text="Курс доллара">
+            <fx:include source="DollarRateTab.fxml"></fx:include>
+        </Tab>
+        <Tab fx:id="statisticTab" text="Статистика">
+            <fx:include source="StatisticTab.fxml"></fx:include>
+        </Tab>
+    </tabs>
+</TabPane>

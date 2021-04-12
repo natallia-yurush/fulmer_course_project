@@ -1,0 +1,18 @@
+
+^	java:S125"<This block of commented-out lines of code should be removed.(¦¼‘¡ıÿÿÿÿ8Ô’´öâ.
+Y	java:S125Š"<This block of commented-out lines of code should be removed.(Èç±8‘¤²öâ.
+^	java:S125¦"<This block of commented-out lines of code should be removed.(¶ŒÉ”üÿÿÿÿ8¨ö¾öâ.
+>
+java:S1068F"(Remove this unused "flow" private field.(ö¢»í
+H
+java:S5411"*Use the primitive boolean expression here.(€‘¨Ä8Ø¯´öâ.
+^	java:S125ª"<This block of commented-out lines of code should be removed.(¼çª¶ûÿÿÿÿ8æ—ãöâ.
+>
+java:S1604S"(Make this anonymous inner class a lambda(½”¼¸
+N
+java:S3655€"7Call "Optional#isPresent()" before accessing the value.(¬’í’
+M
+java:S1135Q"2Complete the task associated to this TODO comment.(å×€Ñşÿÿÿÿ
+E
+java:S3740F"/Provide the parametrized type for this generic.(ö¢»í
+X	java:S125i"<This block of commented-out lines of code should be removed.(âûä…8Ã¨­öâ.

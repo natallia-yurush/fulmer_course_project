@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="289.0" prefWidth="509.0" style="-fx-background-color: #F0F8FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.ny.client.controller.CalculationResultController">
+   <children>
+      <Label layoutX="134.0" layoutY="35.0" text="Результат:" textFill="#0b1549">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="numericResultField" layoutX="248.0" layoutY="29.0" prefHeight="38.0" prefWidth="134.0" style="-fx-background-color: #F0F8FF;">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <Label layoutX="33.0" layoutY="113.0" prefHeight="104.0" prefWidth="463.0" text="Точность прогнозов, сделанных с помощью данной модели на &#10;год вперед — 98%, на два года — 81%." textAlignment="CENTER" textFill="#0b1549">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="textResultField" editable="false" layoutX="47.0" layoutY="90.0" prefHeight="46.0" prefWidth="434.0" style="-fx-background-color: #F0F8FF;">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </TextField>
+      <Button fx:id="txtSaveButton" layoutX="73.0" layoutY="224.0" mnemonicParsing="false" onAction="#saveTxtButtonAction" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Сохранить отчет .txt">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="pdfSaveButton" layoutX="274.0" layoutY="224.0" mnemonicParsing="false" onAction="#savePdfButtonAction" style="-fx-background-color: #DCDCDC; -fx-border-color: #008080; -fx-border-radius: 5;" text="Сохранить отчет .pdf">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
